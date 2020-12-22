@@ -1,0 +1,21 @@
+{
+  "culture": "en",
+  "texts": {
+    "ManageYourProfile": "Manage your profile",
+    "SamplePageMessage": "A sample page for the BroadcastKit module",
+    "Permission:Broadcast": "Broadcast",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:Broadcast": "MenuBroadcast",
+    "Broadcast": "Broadcast",
+    "BroadcastTitle": "BroadcastTitle",
+    "BroadcastFullDescription": "BroadcastFullDescription",
+    "BroadcastStartTime": "BroadcastStartTime",
+    "BroadcastExpireTime": "BroadcastExpireTime",
+    "CreateBroadcast": "CreateBroadcast",
+    "EditBroadcast": "EditBroadcast",
+    "BroadcastDeletionConfirmationMessage": "Are you sure to delete the broadcast {0}?",
+    "SuccessfullyDeleted": "Successfully deleted"
+  }
+}

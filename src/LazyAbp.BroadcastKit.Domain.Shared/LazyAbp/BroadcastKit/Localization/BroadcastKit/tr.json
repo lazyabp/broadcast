@@ -1,0 +1,21 @@
+{
+  "culture": "tr",
+  "texts": {
+    "ManageYourProfile": "Profil yönetimi",
+    "SamplePageMessage": "BroadcastKit modulünden örnek bir sayfa",
+    "Permission:Broadcast": "Broadcast",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:Broadcast": "MenuBroadcast",
+    "Broadcast": "Broadcast",
+    "BroadcastTitle": "BroadcastTitle",
+    "BroadcastFullDescription": "BroadcastFullDescription",
+    "BroadcastStartTime": "BroadcastStartTime",
+    "BroadcastExpireTime": "BroadcastExpireTime",
+    "CreateBroadcast": "CreateBroadcast",
+    "EditBroadcast": "EditBroadcast",
+    "BroadcastDeletionConfirmationMessage": "Are you sure to delete the broadcast {0}?",
+    "SuccessfullyDeleted": "Successfully deleted"
+  }
+}
