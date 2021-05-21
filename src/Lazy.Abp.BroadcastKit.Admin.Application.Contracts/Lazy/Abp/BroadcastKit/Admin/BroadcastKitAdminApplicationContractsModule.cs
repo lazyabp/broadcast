@@ -5,7 +5,10 @@ using Volo.Abp.Modularity;
 
 namespace Lazy.Abp.BroadcastKit.Admin
 {
-    [DependsOn(typeof(BroadcastKitDomainSharedModule))]
+    [DependsOn(
+        typeof(BroadcastKitApplicationContractsModule),
+        typeof(BroadcastKitDomainSharedModule)
+        )]
     public class BroadcastKitAdminApplicationContractsModule : AbpModule
     {
     }

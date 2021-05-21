@@ -12,11 +12,4 @@
     <ProjectReference Include="..\Lazy.Abp.BroadcastKit.Domain.Shared\Lazy.Abp.BroadcastKit.Domain.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="Fody" Version="6.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
 </Project>

@@ -25,7 +25,7 @@ namespace Lazy.Abp.BroadcastKit
                 options.Resources
                     .Add<BroadcastKitResource>("en")
                     .AddBaseTypes(typeof(AbpValidationResource))
-                    .AddVirtualJson("/Lazy.Abp/BroadcastKit/Localization");
+                    .AddVirtualJson("/Lazy/Abp/BroadcastKit/Localization/BroadcastKit");
             });
 
             Configure<AbpExceptionLocalizationOptions>(options =>

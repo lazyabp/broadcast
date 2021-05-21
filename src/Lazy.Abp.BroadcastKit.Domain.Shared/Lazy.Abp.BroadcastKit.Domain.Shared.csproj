@@ -21,11 +21,4 @@
     <Content Remove="Lazy\Abp\BroadcastKit\Localization\BroadcastKit\*.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="Fody" Version="6.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
 </Project>
