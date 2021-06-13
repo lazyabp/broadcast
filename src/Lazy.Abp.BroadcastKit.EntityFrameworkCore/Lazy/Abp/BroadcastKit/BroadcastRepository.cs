@@ -18,16 +18,16 @@ namespace Lazy.Abp.BroadcastKit
         }
 
         public async Task<long> GetCountAsync(
-                bool? isActive = null,
-                DateTime? startAfter = null,
-                DateTime? startBefore = null,
-                DateTime? expireAfter = null,
-                DateTime? expireBefore = null,
-                string filter = null,
-                CancellationToken cancellationToken = default
-            )
+            bool? isActive = null,
+            DateTime? startAfter = null,
+            DateTime? startBefore = null,
+            DateTime? expireAfter = null,
+            DateTime? expireBefore = null,
+            string filter = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            var query = GetListQuery(isActive, startAfter, startBefore, expireAfter, expireBefore, filter);
+            var query = await GetListQuery(isActive, startAfter, startBefore, expireAfter, expireBefore, filter);
 
             var totalCount = await query.LongCountAsync(GetCancellationToken(cancellationToken));
 
@@ -35,19 +35,19 @@ namespace Lazy.Abp.BroadcastKit
         }
 
         public async Task<List<Broadcast>> GetListAsync(
-                string sorting = null,
-                int maxResultCount = 10,
-                int skipCount = 0,
-                bool? isActive = null,
-                DateTime? startAfter = null,
-                DateTime? startBefore = null,
-                DateTime? expireAfter = null,
-                DateTime? expireBefore = null,
-                string filter = null,
-                CancellationToken cancellationToken = default
-            )
+            string sorting = null,
+            int maxResultCount = 10,
+            int skipCount = 0,
+            bool? isActive = null,
+            DateTime? startAfter = null,
+            DateTime? startBefore = null,
+            DateTime? expireAfter = null,
+            DateTime? expireBefore = null,
+            string filter = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            var query = GetListQuery(isActive, startAfter, startBefore, expireAfter, expireBefore, filter);
+            var query = await GetListQuery(isActive, startAfter, startBefore, expireAfter, expireBefore, filter);
 
             var broadcasts = await query.OrderBy(sorting ?? "creationTime desc")
                 .PageBy(skipCount, maxResultCount)
@@ -56,21 +56,22 @@ namespace Lazy.Abp.BroadcastKit
             return broadcasts;
         }
 
-        protected virtual IQueryable<Broadcast> GetListQuery(
-                bool? isActive = null,
-                DateTime? startAfter = null,
-                DateTime? startBefore = null,
-                DateTime? expireAfter = null,
-                DateTime? expireBefore = null,
-                string filter = null
-            )
+        protected async Task<IQueryable<Broadcast>> GetListQuery(
+            bool? isActive = null,
+            DateTime? startAfter = null,
+            DateTime? startBefore = null,
+            DateTime? expireAfter = null,
+            DateTime? expireBefore = null,
+            string filter = null
+        )
         {
-            return DbSet.AsNoTracking()
+            return (await GetQueryableAsync())
+                .AsNoTracking()
                 .WhereIf(isActive.HasValue, e => false || e.IsActive == isActive)
-                .WhereIf(startAfter.HasValue, e => false || e.StartTime >= startAfter.Value)
-                .WhereIf(startBefore.HasValue, e => false || e.StartTime <= startBefore.Value)
-                .WhereIf(expireAfter.HasValue, e => false || e.ExpireTime >= expireAfter.Value)
-                .WhereIf(expireBefore.HasValue, e => false || e.ExpireTime <= expireBefore.Value)
+                .WhereIf(startAfter.HasValue, e => false || e.StartTime >= startAfter.Value.Date)
+                .WhereIf(startBefore.HasValue, e => false || e.StartTime < startBefore.Value.AddDays(1).Date)
+                .WhereIf(expireAfter.HasValue, e => false || e.ExpireTime >= expireAfter.Value.Date)
+                .WhereIf(expireBefore.HasValue, e => false || e.ExpireTime < expireBefore.Value.AddDays(1).Date)
                 .WhereIf(!string.IsNullOrEmpty(filter), 
                     e => false 
                     || e.Title.Contains(filter) 

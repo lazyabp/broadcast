@@ -9,8 +9,10 @@ using Volo.Abp.MultiTenancy;
 
 namespace Lazy.Abp.BroadcastKit
 {
-    public class Broadcast : FullAuditedAggregateRoot<Guid>
+    public class Broadcast : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
+        public virtual Guid? TenantId { get; protected set; }
+
         [NotNull]
         [MaxLength(BroadcastConsts.MaxTitleLength)]
         public virtual string Title { get; protected set; }
@@ -28,6 +30,7 @@ namespace Lazy.Abp.BroadcastKit
         }
 
         public Broadcast(
+            Guid? tenantId,
             Guid id,
             [NotNull] string title, 
             string fullDescription,
@@ -36,9 +39,8 @@ namespace Lazy.Abp.BroadcastKit
             DateTime expireTime
         ) : base(id)
         {
-            Check.NotNullOrEmpty(title, nameof(title));
-
-            Title = title;
+            TenantId = tenantId;
+            Title = Check.NotNullOrEmpty(title, nameof(title));
             FullDescription = fullDescription;
             IsActive = isActive;
             StartTime = startTime;
